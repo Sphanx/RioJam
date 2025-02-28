@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d85c157122c4a0649873eb9ac03f467a, type: 3}
+  m_Name: Whiskey Sour
+  m_EditorClassIdentifier: 
+  cocktailName: Whiskey Sour
+  cocktailImage: {fileID: 0}
+  ingredients:
+  - drink: {fileID: 11400000, guid: 73295dabee3d90948b44090d96db7cee, type: 2}
+    amountInCl: 6
+  - drink: {fileID: 11400000, guid: 55aa01b941901304a8ca7aeaf22cc038, type: 2}
+    amountInCl: 3
+  alcoholPercentage: 14
+  isAlcoholic: 1
