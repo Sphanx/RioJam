@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "RioJamProject.sln"
+    "dotnet.defaultSolution": "RioJam.sln"
 }
