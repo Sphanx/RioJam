@@ -1,8 +1,81 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using System.Collections;
 
 public class SelectIngredient : MonoBehaviour
 {
-    public void SelectBottle(Drinks_SO drink){
+    [Header("Hata Mesajı Ayarları")]
+    public GameObject dialogueBox;           // Hata mesajı için DialogueBox objesi
+    public TMP_Text errorMessageText;        // Hata mesajı metni
+    public float errorMessageDuration = 2f;  // Hata mesajının ekranda kalma süresi (saniye)
+    
+    private Coroutine errorMessageCoroutine; // Hata mesajı coroutine'i
+
+    public void SelectBottle(Drinks_SO drink)
+    {
+        // Eğer GameManager'da bir kokteyl tanımlanmışsa
+        if (GameManager.Instance.cocktail != null)
+        {
+            bool isIngredientNeeded = false;
+            
+            // Seçilen içeceğin kokteyl için gerekli olup olmadığını kontrol et
+            foreach (CocktailIngredient ingredient in GameManager.Instance.cocktail.ingredients)
+            {
+                if (ingredient.drink.drinkName == drink.drinkName)
+                {
+                    isIngredientNeeded = true;
+                    break;
+                }
+            }
+            
+            // Eğer içecek gerekli değilse, hata mesajı göster
+            if (!isIngredientNeeded)
+            {
+                ShowErrorMessage(GameManager.Instance.cocktail.cocktailName, drink.drinkName);
+                return; // İçeceği ekleme
+            }
+        }
+        
+        // İçeceği GameManager'a ekle
         GameManager.Instance.AddDrink(drink);
+    }
+    
+    // Hata mesajını göster
+    private void ShowErrorMessage(string cocktailName, string drinkName)
+    {
+        // Eğer DialogueBox veya errorMessageText null ise, hata mesajı gösterme
+        if (dialogueBox == null || errorMessageText == null)
+        {
+            Debug.LogWarning("DialogueBox veya errorMessageText atanmamış!");
+            return;
+        }
+        
+        // Eğer önceki bir hata mesajı coroutine'i varsa, durdur
+        if (errorMessageCoroutine != null)
+        {
+            StopCoroutine(errorMessageCoroutine);
+        }
+        
+        // Hata mesajını ayarla
+        errorMessageText.text = $"- {cocktailName} için {drinkName}'e ihtiyacım yok.";
+        
+        // DialogueBox'ı aktifleştir
+        dialogueBox.SetActive(true);
+        
+        // Hata mesajı coroutine'ini başlat
+        errorMessageCoroutine = StartCoroutine(HideErrorMessageAfterDelay());
+    }
+    
+    // Belirli bir süre sonra hata mesajını gizle
+    private IEnumerator HideErrorMessageAfterDelay()
+    {
+        yield return new WaitForSeconds(errorMessageDuration);
+        
+        // DialogueBox'ı deaktifleştir
+        dialogueBox.SetActive(false);
+        
+        // Coroutine referansını temizle
+        errorMessageCoroutine = null;
     }
 }
