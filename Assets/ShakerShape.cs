@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 public class ShakerShape : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public ShakerManaging shakerManager; // UI þekillerini yöneten nesne
+    public ShakerManaging shakerManager;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
