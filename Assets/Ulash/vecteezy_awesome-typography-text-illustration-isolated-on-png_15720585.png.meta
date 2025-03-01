@@ -114,6 +114,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -284,7 +297,14 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      vecteezy_awesome-typography-text-illustration-isolated-on-png_15720585_0: 4368420487290961215
+      vecteezy_awesome-typography-text-illustration-isolated-on-png_15720585_1: -3336163548281435782
+      vecteezy_awesome-typography-text-illustration-isolated-on-png_15720585_2: 5471176078833251868
+      vecteezy_awesome-typography-text-illustration-isolated-on-png_15720585_3: 1247861168429009018
+      vecteezy_awesome-typography-text-illustration-isolated-on-png_15720585_4: 7214713502385150085
+      vecteezy_awesome-typography-text-illustration-isolated-on-png_15720585_5: -293296028416740761
+      vecteezy_awesome-typography-text-illustration-isolated-on-png_15720585_6: 8194520007300950893
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

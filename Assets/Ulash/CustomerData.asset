@@ -13,3 +13,10 @@ MonoBehaviour:
   m_Name: CustomerData
   m_EditorClassIdentifier: 
   currentCustomerIndex: 1
+  customerPreferences: []
+  totalCustomersServed: 0
+  satisfiedCustomers: 0
+  dissatisfiedCustomers: 0
+  tutorialCompleted: 1
+  dayNumber: 1
+  customerSatisfactionRating: 0
