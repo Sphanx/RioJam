@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d26627931896a438a378db824bff7a, type: 3}
   m_Name: Gin
   m_EditorClassIdentifier: 
-  drinkName: Lemon Juice
+  drinkName: Gin
   drinkImage: {fileID: 0}
   alcoholPercentage: 40

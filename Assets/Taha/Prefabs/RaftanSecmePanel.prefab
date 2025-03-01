@@ -177,6 +177,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4694044818690574246, guid: 0dad26be1082d924fa4fc2b736470c99, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: b489e213e7d01a14fb45934bbadbb64e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -195,9 +199,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2503700521699947648}
     m_Modifications:
+    - target: {fileID: 1432114791655302924, guid: e19086b4277cd774395f46f9464d3b12, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1432114791655302924, guid: e19086b4277cd774395f46f9464d3b12, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1432114791655302924, guid: e19086b4277cd774395f46f9464d3b12, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1432114791655302924, guid: e19086b4277cd774395f46f9464d3b12, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: SelectIngredient, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1432114791655302924, guid: e19086b4277cd774395f46f9464d3b12, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: 2ac9c1cb63579534fac28e86421a3de5, type: 2}
     - target: {fileID: 4664006445572811578, guid: e19086b4277cd774395f46f9464d3b12, type: 3}
       propertyPath: m_Name
-      value: Vermut
+      value: Vermouth
       objectReference: {fileID: 0}
     - target: {fileID: 8055912173971307425, guid: e19086b4277cd774395f46f9464d3b12, type: 3}
       propertyPath: m_Pivot.x
@@ -381,6 +405,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5344095764442241270, guid: 2786b70515e87724aa9313b75c460b0e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: f3b6e7eedcd34b24bb35d55d54994164, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -399,6 +427,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2503700521699947648}
     m_Modifications:
+    - target: {fileID: 3031404502380884846, guid: 4e9e3dbe83a7adf42b8d89ee1e4047d0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: 8449398c36bbbf843840223598a6e0ca, type: 2}
     - target: {fileID: 6197529185780576195, guid: 4e9e3dbe83a7adf42b8d89ee1e4047d0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -501,6 +533,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2503700521699947648}
     m_Modifications:
+    - target: {fileID: 2489698636999445480, guid: 5425a9d40b5e328448830e04f9af1ed1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: b81d63c7aecb5fd47aa1331938be23d0, type: 2}
     - target: {fileID: 6818047518692071237, guid: 5425a9d40b5e328448830e04f9af1ed1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -603,6 +639,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2503700521699947648}
     m_Modifications:
+    - target: {fileID: 3236692912441574963, guid: 4d10db703f2baaf41adb0e2ab1b6dc55, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: 4b144129185f794468568ab67718b861, type: 2}
     - target: {fileID: 5834614175839902366, guid: 4d10db703f2baaf41adb0e2ab1b6dc55, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -793,6 +833,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Soda
       objectReference: {fileID: 0}
+    - target: {fileID: 8640384654324469447, guid: 2bc4a4979dea73f4ab65e3fe4a01c5b5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: 4a6ff6c555ba3814b8c32e4c7a9cc707, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -895,6 +939,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6677025040959448629, guid: 1f68ccbf890179c49a8ec5e042cac1c6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: 55aa01b941901304a8ca7aeaf22cc038, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -913,6 +961,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2503700521699947648}
     m_Modifications:
+    - target: {fileID: 3411046050169620752, guid: f65066cba393cf047bcb6ac9dbcc4336, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: b32366cd7fcca5f47a2280edbd36949d, type: 2}
     - target: {fileID: 6000419710735455677, guid: f65066cba393cf047bcb6ac9dbcc4336, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1015,6 +1067,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2503700521699947648}
     m_Modifications:
+    - target: {fileID: 371326866789191107, guid: 4230bd544e1a8c044bd8a0a9a9b72595, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: 73295dabee3d90948b44090d96db7cee, type: 2}
     - target: {fileID: 6215304105557672437, guid: 4230bd544e1a8c044bd8a0a9a9b72595, type: 3}
       propertyPath: m_Name
       value: Whiskey
