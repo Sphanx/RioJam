@@ -14,6 +14,8 @@ public class TargetZone : MonoBehaviour
     public TMP_Text dialogueText;
     private Rigidbody2D rb;
     public DialogueManager dialogueManager; // Diyalog yöneticisi referansı
+    public GameObject nextButton; // Next butonu referansı,
+    public GameObject throwCupPanel;
 
     void Start()
     {
@@ -75,5 +77,26 @@ public class TargetZone : MonoBehaviour
         {
             isInTarget = false;
         }
+    }
+    
+    // Next butonu için fonksiyon
+    public void NextButton()
+    {
+        // GameManager'ı temizle
+        GameManager.Instance.selectedDrinks.Clear();
+        GameManager.Instance.cocktail = null;
+        Debug.Log("GameManager temizlendi.");
+        
+        // Bulunduğu sahneyi deaktif et
+        throwCupPanel.SetActive(false);
+        // UIManager'da element1'e dön
+        UIManager.Instance.ActivatePanel(1);
+        
+        // currentCustomerIndex değerini 1 artır
+        dialogueManager.currentCustomerIndex++;
+        
+        // Debug log
+        Debug.Log("Next butonu tıklandı. Müşteri indeksi: " + dialogueManager.currentCustomerIndex);
+        DialogueManager.Instance.StartDialogue();
     }
 }

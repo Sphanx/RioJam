@@ -39,6 +39,15 @@ public class SelectIngredient : MonoBehaviour
         
         // İçeceği GameManager'a ekle
         GameManager.Instance.AddDrink(drink);
+        
+        // Eğer GameManager'da kokteyl için gerekli iki içecek eklenmişse
+        if (GameManager.Instance.cocktail != null &&
+            GameManager.Instance.selectedDrinks.Count >= 2 &&
+            GameManager.Instance.selectedDrinks.Count >= GameManager.Instance.cocktail.ingredients.Count)
+        {
+            // UIManager'dan nextPanel metodunu çağır
+            UIManager.Instance.NextPanel();
+        }
     }
     
     // Hata mesajını göster

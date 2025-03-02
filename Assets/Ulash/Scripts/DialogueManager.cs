@@ -6,6 +6,8 @@ using System.Collections;
 
 public class DialogueManager : MonoBehaviour
 {
+    public static DialogueManager Instance { get; private set; }
+
     [System.Serializable]
     public class Customer
     {
@@ -56,6 +58,17 @@ public class DialogueManager : MonoBehaviour
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
         audioSource.volume = 0.5f;
+        // Singleton pattern
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
     }
 
     private void Start()
@@ -90,6 +103,9 @@ public class DialogueManager : MonoBehaviour
         // İlk diyaloğu başlat
         StartDialogue();
     }
+
+    // Örnek diyalogları oluştur
+
 
     // Diyaloğu başlat
     public void StartDialogue()
@@ -359,7 +375,6 @@ public class DialogueManager : MonoBehaviour
             Debug.LogError("Geçersiz müşteri indeksi: " + index);
         }
     }
-
     public void TriggerSuccessDialogue()
     {
         if (currentCustomerIndex < customers.Length)
