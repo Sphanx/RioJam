@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Whiskey
   m_EditorClassIdentifier: 
   drinkName: Whiskey
-  drinkImage: {fileID: 0}
+  drinkImage: {fileID: 6106173295488242141, guid: 3b4d2d28790b74c45972c95292c0543e, type: 3}
   alcoholPercentage: 40

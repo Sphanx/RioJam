@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Orange Juice
   m_EditorClassIdentifier: 
   drinkName: Orange Juice
-  drinkImage: {fileID: 0}
+  drinkImage: {fileID: -999226354237848763, guid: a4a2e589b6a8ac24cb0843f7b7e515c2, type: 3}
   alcoholPercentage: 0

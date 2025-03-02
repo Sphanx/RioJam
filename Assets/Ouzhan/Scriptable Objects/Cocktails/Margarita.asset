@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Margarita
   m_EditorClassIdentifier: 
   cocktailName: Margarita
-  cocktailImage: {fileID: 0}
+  cocktailImage: {fileID: 21300000, guid: dd0b765c79b99b0488dfa1d3ecb52756, type: 3}
   ingredients:
   - drink: {fileID: 11400000, guid: 4b144129185f794468568ab67718b861, type: 2}
     amountInCl: 5

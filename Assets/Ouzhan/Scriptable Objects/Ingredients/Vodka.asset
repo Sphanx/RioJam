@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Vodka
   m_EditorClassIdentifier: 
   drinkName: Vodka
-  drinkImage: {fileID: 0}
+  drinkImage: {fileID: -270103747934955857, guid: d3e955b85b6d9114cb3f4be43575a0c6, type: 3}
   alcoholPercentage: 40

@@ -95,6 +95,26 @@ public class TargetZone : MonoBehaviour
         // currentCustomerIndex değerini 1 artır
         dialogueManager.currentCustomerIndex++;
         
+        // DialogueManager'ı sıfırla
+        if (DialogueManager.Instance != null)
+        {
+            // Diyalog aşamasını sıfırla
+            DialogueManager.Instance.ResetDialogue();
+
+            
+            if (DialogueManager.Instance.nextDialogueButton != null)
+            {
+                DialogueManager.Instance.nextDialogueButton.gameObject.SetActive(true);
+            }
+            
+            if (DialogueManager.Instance.sceneChangeButton != null)
+            {
+                DialogueManager.Instance.sceneChangeButton.gameObject.SetActive(false);
+            }
+            
+            Debug.Log("DialogueManager sıfırlandı.");
+        }
+        
         // Debug log
         Debug.Log("Next butonu tıklandı. Müşteri indeksi: " + dialogueManager.currentCustomerIndex);
         DialogueManager.Instance.StartDialogue();

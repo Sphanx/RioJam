@@ -4,82 +4,73 @@ using System.Collections.Generic;
 using TMPro;
 public class ShakerManager : MonoBehaviour
 {
-    public GameObject liquidPrefab; // Eklenecek sıvı prefabı
-    public Transform spawnPosition; // Sıvının spawn edileceği nokta
-    public int maxCapacity = 500; // Shaker'ın toplam kapasitesi (ml)
-    private float currentFill = 0f; // Mevcut doluluk seviyesi
+    public static ShakerManager Instance;
+    public GameObject liquidPrefab;
+    public Transform spawnPosition;
+    public SpriteRenderer bottleImg;
+    public int liquidMultiplier = 10;
+    private float currentFill = 0f;
     private GameObject miscItems;
+    public GameObject dialogueBox;
     public bool isFillingDone = false;
-    private int previousLiquidCount = 0; // Önceki sıvı sayısı (referans değeri)
-    
+    private int previousLiquidCount = 0;
+
     [Header("Liquid Add Settings")]
-    public float liquidAddCooldown = 0.2f; // Sıvı ekleme arasındaki bekleme süresi (saniye)
-    private float lastLiquidAddTime = 0f; // Son sıvı ekleme zamanı
+    public float liquidAddCooldown = 0.2f;
+    private float lastLiquidAddTime = 0f;
 
-    // Kokteyl malzemeleri için değişkenler
-    private int currentIngredientIndex = 0; // Şu anki malzeme indeksi
-    private float currentIngredientTarget = 0f; // Şu anki malzemenin hedef miktarı
-    private List<CocktailIngredient> ingredients; // Kokteyl malzemeleri listesi
+    private int currentIngredientIndex = 0;
+    private float currentIngredientTarget = 0f;
+    public TMP_Text currentIngredientText;
+    private List<CocktailIngredient> ingredients;
+    private bool isDone = false;
 
-    public Slider fillSlider; // UI'de sıvı seviyesini gösteren slider
-    public TMP_Text currentIngredientText; // Şu anki malzemenin adını gösteren metin (opsiyonel)
-    private List<GameObject> liquidsFill = new List<GameObject>(); // Sıvı objeleri listesi
+
+    private List<GameObject> liquidsFill = new List<GameObject>();
     public int ingredientModifier = 10;
-
-
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
     void Start()
     {
         miscItems = GameObject.Find("MiscItems");
-        // Başlangıçta kokteyl bilgilerini al
         GetCurrentCocktail();
     }
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && !isDone)
         {
             AddLiquid();
         }
-        // Mevcut doluluk seviyesini hesapla (toplam sıvı sayısı - önceki sıvı sayısı)
-        currentFill = liquidsFill.Count - previousLiquidCount;
-
-        if (currentFill >= fillSlider.value)
+        if (currentIngredientIndex >= 0 && currentIngredientIndex < ingredients.Count)
         {
-            Debug.Log("Yeterince malzeme dolduruldu.");
-
-            // Bir sonraki malzemeye otomatik olarak geç
-            NextIngredient();
+            bottleImg.sprite = ingredients[currentIngredientIndex].drink.drinkImage;
+        }
+        else
+        {
+            Debug.LogError("currentIngredientIndex is out of range.");
+        }
+        if(isDone){
+            ClearLiquids();
+            Debug.Log("3131113");
         }
     }
 
-    // GameManager'dan şu anki kokteyli al
     public void GetCurrentCocktail()
     {
-        // Önceki sıvı sayısını sıfırla
         previousLiquidCount = 0;
 
-        // GameManager'dan şu anki kokteyli al
         Cocktail_SO currentCocktail = GameManager.Instance.cocktail;
-
         if (currentCocktail != null)
         {
-            // Kokteyl malzemelerini al
             ingredients = new List<CocktailIngredient>(currentCocktail.ingredients);
 
-            // Tüm malzemelerin toplam miktarını hesapla
-            float totalAmount = 0f;
-            foreach (CocktailIngredient ingredient in ingredients)
-            {
-                totalAmount += ingredient.amountInCl;
-            }
-            
-            // Slider'ın maxValue değerini tüm malzemelerin toplam miktarına eşitle
-            fillSlider.maxValue = totalAmount * ingredientModifier;
-            
-            // Diğer kokteyl bilgilerini kullanmak için gerekirse burada işlem yapılabilir
-            Debug.Log("Kokteyl alındı: " + currentCocktail.cocktailName + ", Toplam miktar: " + totalAmount + " cl");
-
-            // İlk malzemeyi ayarla (eğer malzeme varsa)
             if (ingredients.Count > 0)
             {
                 currentIngredientIndex = 0;
@@ -96,73 +87,71 @@ public class ShakerManager : MonoBehaviour
         }
     }
 
-    // Belirtilen indeksteki malzemeyi ayarla
     private void SetCurrentIngredient(int index)
     {
         if (index >= 0 && index < ingredients.Count)
         {
             CocktailIngredient ingredient = ingredients[index];
-            currentIngredientTarget = ingredient.amountInCl;
-
-            // UI güncelleme
-            if (currentIngredientText != null)
-            {
-                currentIngredientText.text = ingredient.drink.drinkName + " (" + ingredient.amountInCl + " cl)";
-            }
-
-            // Sadece value değerini güncelle, maxValue değişmez
-            fillSlider.value = ingredient.amountInCl * ingredientModifier;
-
+            currentIngredientTarget = ingredient.amountInCl * liquidMultiplier;
             Debug.Log("Şu anki malzeme: " + ingredient.drink.drinkName);
         }
     }
 
-    // Bir sonraki malzemeye geç
     public void NextIngredient()
     {
-        // Mevcut sıvı sayısını referans olarak kaydet
         previousLiquidCount = liquidsFill.Count;
-
-        // Şu anki malzeme indeksini artır
         currentIngredientIndex++;
 
-        // Eğer daha fazla malzeme varsa
         if (currentIngredientIndex < ingredients.Count)
         {
-            // Bir sonraki malzemeyi ayarla
             SetCurrentIngredient(currentIngredientIndex);
             Debug.Log("Sıradaki malzemeye geçildi: " + ingredients[currentIngredientIndex].drink.drinkName);
         }
         else
         {
-            // Tüm malzemeler dolduruldu
             Debug.Log("Tüm malzemeler dolduruldu! Kokteyl tamamlandı.");
-
-            // Burada kokteyl tamamlandığında yapılacak işlemleri ekleyebilirsiniz
-            // Örneğin: Bir UI paneli gösterme, puan verme, vb.
+            dialogueBox.SetActive(true);
+            isDone = true;
         }
+    }
+    public void JumpNextScene(){
+        isDone = false;
+        dialogueBox.SetActive(false);
+        UIManager.Instance.NextPanel();
     }
 
     [Header("Liquid Spawn Settings")]
-    public float spawnRadius = 0.5f; // Sıvının spawn edilebileceği maksimum yarıçap
+    public float spawnRadius = 0.5f;
+
+    private void ClearLiquids()
+    {
+        foreach (var liquid in liquidsFill)
+        {
+            Destroy(liquid);
+        }
+        liquidsFill.Clear();
+        currentFill = 0f;
+    }
 
     public void AddLiquid()
     {
-        // Cooldown kontrolü yap
         if (Time.time - lastLiquidAddTime < liquidAddCooldown)
         {
-            // Cooldown süresi dolmadıysa, sıvı ekleme
             return;
         }
-        
-        // Son sıvı ekleme zamanını güncelle
+
+
         lastLiquidAddTime = Time.time;
-        
-        // Spawn pozisyonu etrafında rastgele bir konum oluştur
+
         Vector2 randomOffset = Random.insideUnitCircle * spawnRadius;
         Vector3 randomPosition = spawnPosition.position + new Vector3(randomOffset.x, randomOffset.y, 0f);
 
-        // Rastgele konumda sıvı prefabını instantiate et
         liquidsFill.Add(Instantiate(liquidPrefab, randomPosition, Quaternion.identity, miscItems.transform));
+        currentFill++;
+
+        if (currentFill >= currentIngredientTarget)
+        {
+            NextIngredient();
+        }
     }
 }

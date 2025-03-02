@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Tequila
   m_EditorClassIdentifier: 
   drinkName: Tequila
-  drinkImage: {fileID: 0}
+  drinkImage: {fileID: 429940883864946216, guid: 824e00a480c8077469de2d13852ebf56, type: 3}
   alcoholPercentage: 40

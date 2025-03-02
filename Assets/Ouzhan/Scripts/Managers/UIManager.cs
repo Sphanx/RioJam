@@ -5,10 +5,10 @@ public class UIManager : MonoBehaviour
 {
     // Panel listesi - Unity Inspector'da düzenlenebilir
     [SerializeField] private List<GameObject> panels = new List<GameObject>();
-    
+
     // Şu anki aktif panel indeksi
     private int currentPanelIndex = 0;
-    
+
     // Singleton instance
     public static UIManager Instance { get; private set; }
 
@@ -30,7 +30,7 @@ public class UIManager : MonoBehaviour
     {
         // Başlangıçta tüm panelleri deaktif et
         DeactivateAllPanels();
-        
+
         // Eğer panel listesi boş değilse, ilk paneli aktif et
         if (panels.Count > 0)
         {
@@ -41,7 +41,7 @@ public class UIManager : MonoBehaviour
             Debug.LogWarning("Panel listesi boş! UIManager'a panel ekleyin.");
         }
     }
-    
+
     // Tüm panelleri deaktif et
     private void DeactivateAllPanels()
     {
@@ -53,7 +53,7 @@ public class UIManager : MonoBehaviour
             }
         }
     }
-    
+
     // Belirli bir indeksteki paneli aktif et
     public void ActivatePanel(int index)
     {
@@ -63,34 +63,35 @@ public class UIManager : MonoBehaviour
             Debug.LogError("Geçersiz panel indeksi: " + index);
             return;
         }
-        
+
         // Şu anki paneli deaktif et
         if (currentPanelIndex >= 0 && currentPanelIndex < panels.Count)
         {
             panels[currentPanelIndex].SetActive(false);
         }
-        
+
         // Yeni paneli aktif et
         panels[index].SetActive(true);
         currentPanelIndex = index;
-        
+
         Debug.Log("Panel aktif edildi: " + index);
     }
-    
+
     // Bir sonraki panele geç
     public void NextPanel()
     {
-        int nextIndex = (currentPanelIndex + 1) % panels.Count;
+        int nextIndex = currentPanelIndex + 1;
         ActivatePanel(nextIndex);
+
     }
-    
+
     // Bir önceki panele geç
     public void PreviousPanel()
     {
-        int prevIndex = (currentPanelIndex - 1 + panels.Count) % panels.Count;
+        int prevIndex = currentPanelIndex - 1;
         ActivatePanel(prevIndex);
     }
-    
+
     // Belirli bir paneli aktif et (GameObject referansı ile)
     public void ActivatePanel(GameObject panel)
     {
@@ -104,7 +105,7 @@ public class UIManager : MonoBehaviour
             Debug.LogError("Panel listede bulunamadı: " + panel.name);
         }
     }
-    
+
     // Panel sırasını değiştir (iki indeks arasında)
     public void SwapPanels(int index1, int index2)
     {
@@ -114,14 +115,14 @@ public class UIManager : MonoBehaviour
             Debug.LogError("Geçersiz panel indeksi: " + index1 + " veya " + index2);
             return;
         }
-        
+
         // Panellerin yerini değiştir
         GameObject temp = panels[index1];
         panels[index1] = panels[index2];
         panels[index2] = temp;
-        
+
         Debug.Log("Paneller yer değiştirdi: " + index1 + " <-> " + index2);
-        
+
         // Eğer aktif panel değiştiyse, görünümü güncelle
         if (currentPanelIndex == index1)
         {
@@ -132,7 +133,7 @@ public class UIManager : MonoBehaviour
             currentPanelIndex = index1;
         }
     }
-    
+
     // Bir paneli belirli bir indekse taşı
     public void MovePanel(int sourceIndex, int targetIndex)
     {
@@ -142,19 +143,19 @@ public class UIManager : MonoBehaviour
             Debug.LogError("Geçersiz panel indeksi: " + sourceIndex + " veya " + targetIndex);
             return;
         }
-        
+
         // Aynı indeks ise işlem yapma
         if (sourceIndex == targetIndex)
         {
             return;
         }
-        
+
         // Taşınacak paneli al
         GameObject panelToMove = panels[sourceIndex];
-        
+
         // Şu anki aktif panel indeksini takip et
         int newCurrentIndex = currentPanelIndex;
-        
+
         // Eğer aktif panel taşınıyorsa, yeni indeksini güncelle
         if (currentPanelIndex == sourceIndex)
         {
@@ -173,10 +174,10 @@ public class UIManager : MonoBehaviour
                 newCurrentIndex++;
             }
         }
-        
+
         // Paneli listeden çıkar
         panels.RemoveAt(sourceIndex);
-        
+
         // Hedef indekse ekle
         if (targetIndex > panels.Count)
         {
@@ -186,13 +187,13 @@ public class UIManager : MonoBehaviour
         {
             panels.Insert(targetIndex, panelToMove);
         }
-        
+
         // Aktif panel indeksini güncelle
         currentPanelIndex = newCurrentIndex;
-        
+
         Debug.Log("Panel taşındı: " + sourceIndex + " -> " + targetIndex);
     }
-    
+
     // Yeni panel ekle
     public void AddPanel(GameObject panel)
     {
@@ -203,7 +204,7 @@ public class UIManager : MonoBehaviour
             Debug.Log("Yeni panel eklendi: " + panel.name);
         }
     }
-    
+
     // Panel kaldır
     public void RemovePanel(int index)
     {
@@ -213,10 +214,10 @@ public class UIManager : MonoBehaviour
             Debug.LogError("Geçersiz panel indeksi: " + index);
             return;
         }
-        
+
         // Kaldırılacak paneli deaktif et
         panels[index].SetActive(false);
-        
+
         // Eğer aktif panel kaldırılıyorsa, başka bir panele geç
         if (currentPanelIndex == index)
         {
@@ -238,25 +239,25 @@ public class UIManager : MonoBehaviour
         {
             currentPanelIndex--;
         }
-        
+
         // Paneli listeden kaldır
         panels.RemoveAt(index);
-        
+
         Debug.Log("Panel kaldırıldı: " + index);
     }
-    
+
     // Şu anki aktif panel indeksini döndür
     public int GetCurrentPanelIndex()
     {
         return currentPanelIndex;
     }
-    
+
     // Panel sayısını döndür
     public int GetPanelCount()
     {
         return panels.Count;
     }
-    
+
     // Belirli bir indeksteki paneli döndür
     public GameObject GetPanel(int index)
     {
@@ -266,7 +267,7 @@ public class UIManager : MonoBehaviour
         }
         return null;
     }
-    
+
     // Şu anki aktif paneli döndür
     public GameObject GetCurrentPanel()
     {

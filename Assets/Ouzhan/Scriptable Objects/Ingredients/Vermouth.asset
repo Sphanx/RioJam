@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Vermouth
   m_EditorClassIdentifier: 
   drinkName: Vermouth
-  drinkImage: {fileID: 0}
+  drinkImage: {fileID: 6738084227053436671, guid: afee079d2d28bf8418c08492586c021d, type: 3}
   alcoholPercentage: 40

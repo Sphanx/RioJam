@@ -3,13 +3,14 @@ using UnityEngine;
 public class ShakerController : MonoBehaviour
 {
     public float shakeAmount = 0.2f; // Sallanma mesafesi
-    public float shakeSpeed = 10f;   // Sallanma h�z�
+    public float shakeSpeed = 10f;   // Sallanma hızı
     private bool isShaking = false;
     private Vector3 startPosition;
+    public AudioSource shakeSes;
 
     void Start()
     {
-        startPosition = transform.position; // Ba�lang�� pozisyonunu kaydet
+        startPosition = transform.position; // Başlangıç pozisyonunu kaydet
     }
 
     void Update()
@@ -23,11 +24,20 @@ public class ShakerController : MonoBehaviour
 
     public void StartShaking()
     {
-        isShaking = true;
+        if (!isShaking) // Zaten çalışıyorsa tekrar başlatmaya gerek yok
+        {
+            isShaking = true;
+            shakeSes.Stop(); // Sesin baştan başlaması için önce durdur
+            shakeSes.Play(); // Sonra tekrar başlat
+        }
     }
 
     public void StopShaking()
     {
-        isShaking = false;
+        if (isShaking) // Eğer zaten durmuşsa tekrar durdurmaya gerek yok
+        {
+            isShaking = false;
+            shakeSes.Stop(); // Sallanma durunca sesi de durdur
+        }
     }
 }

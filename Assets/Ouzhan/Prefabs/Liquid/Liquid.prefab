@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7798725291028989438}
   - component: {fileID: 220468193421548202}
   - component: {fileID: 6354858150232248220}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Liquid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ RectTransform:
   m_GameObject: {fileID: 492313423928462936}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -5.0011616}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f, type: 3}
+  m_Sprite: {fileID: 510770009049708709, guid: 8c0fb3a3b78fdeb41a905ef11165f5e4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -87,7 +87,7 @@ CircleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: a645f4b0b8178c6498375d0a95f5768d, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -128,7 +128,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0
-  m_GravityScale: 15
+  m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: a645f4b0b8178c6498375d0a95f5768d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2

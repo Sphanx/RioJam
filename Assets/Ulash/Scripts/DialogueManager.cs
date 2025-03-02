@@ -85,24 +85,11 @@ public class DialogueManager : MonoBehaviour
         {
             dialoguePanel.SetActive(false);
         }
-
-        // Start butonunu bul ve dinleyici ekle
-        Button startButton = GameObject.Find("StartButton").GetComponent<Button>(); // Start butonunun adını doğru şekilde ayarlayın
-        startButton.onClick.AddListener(OnStartButtonClicked);
+        StartDialogue();
     }
 
     // Start butonuna tıklandığında çağrılır
-    private void OnStartButtonClicked()
-    {
-        // Diyalog panelini göster
-        if (dialoguePanel != null)
-        {
-            dialoguePanel.SetActive(true);
-        }
 
-        // İlk diyaloğu başlat
-        StartDialogue();
-    }
 
     // Örnek diyalogları oluştur
 
@@ -407,5 +394,30 @@ public class DialogueManager : MonoBehaviour
         if (currentCustomerIndex < customers.Length)
             return customers[currentCustomerIndex].failDialogue;
         return "Başarısızlık!";
+    }
+    
+    // Diyalog sistemini sıfırla
+    public void ResetDialogue()
+    {
+        // Diyalog aşamasını sıfırla
+        dialogueStage = 0;
+        
+        // Diyalog panelini ve butonları ayarla
+        if (dialoguePanel != null)
+        {
+            dialoguePanel.SetActive(true);
+        }
+        
+        if (nextDialogueButton != null)
+        {
+            nextDialogueButton.gameObject.SetActive(true);
+        }
+        
+        if (sceneChangeButton != null)
+        {
+            sceneChangeButton.gameObject.SetActive(false);
+        }
+        
+        Debug.Log("DialogueManager sıfırlandı.");
     }
 }

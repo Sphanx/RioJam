@@ -7,6 +7,7 @@ public class SelectIngredient : MonoBehaviour
 {
     [Header("Hata Mesajı Ayarları")]
     public GameObject dialogueBox;           // Hata mesajı için DialogueBox objesi
+    public GameObject nextButton;
     public TMP_Text errorMessageText;        // Hata mesajı metni
     public float errorMessageDuration = 2f;  // Hata mesajının ekranda kalma süresi (saniye)
     
@@ -35,6 +36,9 @@ public class SelectIngredient : MonoBehaviour
                 ShowErrorMessage(GameManager.Instance.cocktail.cocktailName, drink.drinkName);
                 return; // İçeceği ekleme
             }
+            // Doğru içecek seçildiğinde diyalog kutusunu etkinleştir
+            errorMessageText.text = "this will do";
+            dialogueBox.SetActive(true);
         }
         
         // İçeceği GameManager'a ekle
@@ -46,11 +50,11 @@ public class SelectIngredient : MonoBehaviour
             GameManager.Instance.selectedDrinks.Count >= GameManager.Instance.cocktail.ingredients.Count)
         {
             // UIManager'dan nextPanel metodunu çağır
-            UIManager.Instance.NextPanel();
+            nextButton.SetActive(true);
         }
     }
-    
-    // Hata mesajını göster
+
+    // Hata mesajını göster 
     private void ShowErrorMessage(string cocktailName, string drinkName)
     {
         // Eğer DialogueBox veya errorMessageText null ise, hata mesajı gösterme
@@ -67,7 +71,7 @@ public class SelectIngredient : MonoBehaviour
         }
         
         // Hata mesajını ayarla
-        errorMessageText.text = $"- {cocktailName} için {drinkName}'e ihtiyacım yok.";
+        errorMessageText.text = $"-I don't need {drinkName} for {cocktailName}.";
         
         // DialogueBox'ı aktifleştir
         dialogueBox.SetActive(true);

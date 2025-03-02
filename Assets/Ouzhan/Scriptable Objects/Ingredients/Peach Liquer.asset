@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Peach Liquer
   m_EditorClassIdentifier: 
   drinkName: Peach liqueur
-  drinkImage: {fileID: 0}
+  drinkImage: {fileID: -7695263970022260900, guid: e0f877507eb18994087ce30ab5552965, type: 3}
   alcoholPercentage: 18

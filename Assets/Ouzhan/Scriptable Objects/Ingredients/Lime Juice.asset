@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Lime Juice
   m_EditorClassIdentifier: 
   drinkName: Lime Juice
-  drinkImage: {fileID: 0}
+  drinkImage: {fileID: 1876529894902004909, guid: 327aebfa39168a04798ca39bcd7373c1, type: 3}
   alcoholPercentage: 0

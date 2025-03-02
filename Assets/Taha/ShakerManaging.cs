@@ -6,15 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class ShakerManaging : MonoBehaviour
 {
-    public ShakerController shakerController; // Shaker kontrolcüsü
-    public Image[] shapes; // UI þekillerinin listesi
-    public Slider progressBar; // 5 saniye dolma çubuðu
+    public ShakerController shakerController; // Shaker kontrolcï¿½sï¿½
+    public Image[] shapes; // UI ï¿½ekillerinin listesi
+    public Slider progressBar; // 5 saniye dolma ï¿½ubuï¿½u
     public Canvas canvas;
-    public float disappearTime = 1f; // Þeklin ekranda kalma süresi
-    public float maxHoldTime = 5f; // Kaç saniye tutarsak yeni sahneye geçelim?
+    public float disappearTime = 1f; // ï¿½eklin ekranda kalma sï¿½resi
+    public float maxHoldTime = 5f; // Kaï¿½ saniye tutarsak yeni sahneye geï¿½elim?
 
-    private float holdTimer = 0f; // Fareyi kaç saniye tuttuk?
-    private int currentShapeIndex = 0; // Þu an hangi þekil açýk?
+    private float holdTimer = 0f; // Fareyi kaï¿½ saniye tuttuk?
+    private int currentShapeIndex = 0; // ï¿½u an hangi ï¿½ekil aï¿½ï¿½k?
 
     void Start()
     {
@@ -24,22 +24,22 @@ public class ShakerManaging : MonoBehaviour
 
     void ShowNextShape()
     {
-        // Önce tüm þekilleri kapat
+        // ï¿½nce tï¿½m ï¿½ekilleri kapat
         foreach (var shape in shapes)
         {
             shape.gameObject.SetActive(false);
         }
 
-        // Rastgele bir þekli aç ve belirlenen aralýkta konumlandýr
+        // Rastgele bir ï¿½ekli aï¿½ ve belirlenen aralï¿½kta konumlandï¿½r
         if (shapes.Length > 0)
         {
             currentShapeIndex = Random.Range(0, shapes.Length);
             shapes[currentShapeIndex].gameObject.SetActive(true);
 
-            // **Þekli rastgele noktaya yerleþtir**
+            // **ï¿½ekli rastgele noktaya yerleï¿½tir**
             shapes[currentShapeIndex].rectTransform.anchoredPosition = GetRandomPosition();
 
-            // 1 saniye sonra yeni bir þekil göster
+            // 1 saniye sonra yeni bir ï¿½ekil gï¿½ster
             Invoke("ShowNextShape", disappearTime);
         }
     }
@@ -74,18 +74,14 @@ public class ShakerManaging : MonoBehaviour
             holdTimer += Time.deltaTime;
             progressBar.value += 0.3f;
 
-            if (holdTimer >= maxHoldTime)
+            if (progressBar.value == progressBar.maxValue)
             {
-                LoadNextScene();
+                progressBar.value = 0;
+                UIManager.Instance.NextPanel();
             }
 
             yield return null;
         }
     }
 
-    void LoadNextScene()
-    {
-        Debug.Log("Yeni sahneye geçiliyor...");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
 }

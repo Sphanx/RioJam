@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Gin
   m_EditorClassIdentifier: 
   drinkName: Gin
-  drinkImage: {fileID: 0}
+  drinkImage: {fileID: -7915213769855662224, guid: 845743a4d5820df49a3fad0a4ee0ec15, type: 3}
   alcoholPercentage: 40
