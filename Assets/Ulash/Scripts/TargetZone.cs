@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class TargetZone : MonoBehaviour
@@ -9,52 +10,60 @@ public class TargetZone : MonoBehaviour
     private float timer = 0f;
     private bool isInTarget = false;
     private bool hasStopped = false; // Bardak durdu mu?
+    public GameObject dialogueBox; // Diyalog kutusunu aç/kapatmak için
+    public TMP_Text dialogueText;
     private Rigidbody2D rb;
+    public DialogueManager dialogueManager; // Diyalog yöneticisi referansı
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         successImage.SetActive(false);
         failImage.SetActive(false);
+        dialogueBox.SetActive(false); // Diyalog kutusu başta kapalı olsun
     }
 
     void Update()
     {
-        if (powerbarScript.hasGameStarted)
+         if (powerbarScript.hasGameStarted)
         {
-            // Bardak çok yavaşsa (neredeyse duruyorsa)
             if (rb.linearVelocity.magnitude < 0.1f)
             {
                 timer += Time.deltaTime;
-                if (timer >= stationaryTime) // Belirtilen sürede hareketsizse
+                if (timer >= stationaryTime)
                 {
                     hasStopped = true;
                 }
             }
             else
             {
-                timer = 0f; // Hareket ederse süreyi sıfırla
+                timer = 0f;
                 hasStopped = false;
             }
 
-            // Eğer bardak durduysa ve hedef alandaysa başarı
-            if (hasStopped && isInTarget)
+            if (hasStopped)
             {
-                successImage.SetActive(true);
-                failImage.SetActive(false);
+                ShowDialogue(isInTarget);
             }
-            // Eğer bardak durdu ama hedef alanda değilse başarısızlık
-            else if (hasStopped && !isInTarget)
-            {
-                failImage.SetActive(true);
-                successImage.SetActive(false);
-            }
+        }
+    }
+
+    void ShowDialogue(bool success)
+    {
+        dialogueBox.SetActive(true);
+        if (success)
+        {
+            dialogueText.text = dialogueManager.GetSuccessDialogue();
+        }
+        else
+        {
+            dialogueText.text = dialogueManager.GetFailDialogue();
         }
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("TargetZone")) // Hedef alana girerse
+        if (other.CompareTag("TargetZone"))
         {
             isInTarget = true;
         }
@@ -62,15 +71,9 @@ public class TargetZone : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("TargetZone")) // Hedef alandan çıkarsa
+        if (other.CompareTag("TargetZone"))
         {
             isInTarget = false;
-            successImage.SetActive(false);
-
-            if (hasStopped) // Eğer bardak durmadan çıktıysa başarısızlık resmi aç
-            {
-                failImage.SetActive(true);
-            }
         }
     }
 }

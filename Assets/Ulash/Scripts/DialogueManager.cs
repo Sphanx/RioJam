@@ -13,10 +13,12 @@ public class DialogueManager : MonoBehaviour
         public string customerDialogue;  // Müşteri konuşması
         public string playerResponse;    // Bizim cevabımız
         public string customerFinalReply; // Müşterinin son cevabı
+        public string successDialogue;   // Başarı diyaloğu
+        public string failDialogue;      // Başarısızlık diyaloğu
         public Sprite playerSprite;      // Barmen resmi
         public Sprite customerSprite;    // Müşteri resmi
         public Cocktail_SO customerCocktail; // Müşterinin istediği kokteyl
-    }
+    } 
 
     [Header("UI Referansları")]
     public Image customerImageUI;       // UI'daki müşteri resmi
@@ -326,5 +328,36 @@ public class DialogueManager : MonoBehaviour
         {
             Debug.LogError("Geçersiz müşteri indeksi: " + index);
         }
+    }
+        public void TriggerSuccessDialogue()
+    {
+        if (currentCustomerIndex < customers.Length)
+        {
+            dialoguePanel.SetActive(true);
+            dialogueText.text = customers[currentCustomerIndex].successDialogue;
+        }
+    }
+
+    public void TriggerFailDialogue()
+    {
+        if (currentCustomerIndex < customers.Length)
+        {
+            dialoguePanel.SetActive(true);
+            dialogueText.text = customers[currentCustomerIndex].failDialogue;
+        }
+    }
+
+        public string GetSuccessDialogue()
+    {
+        if (currentCustomerIndex < customers.Length)
+            return customers[currentCustomerIndex].successDialogue;
+        return "Başarıyla tamamlandı!";
+    }
+
+    public string GetFailDialogue()
+    {
+        if (currentCustomerIndex < customers.Length)
+            return customers[currentCustomerIndex].failDialogue;
+        return "Başarısızlık!";
     }
 }
