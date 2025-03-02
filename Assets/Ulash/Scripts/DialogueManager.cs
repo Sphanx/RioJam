@@ -18,7 +18,14 @@ public class DialogueManager : MonoBehaviour
         public Sprite playerSprite;      // Barmen resmi
         public Sprite customerSprite;    // Müşteri resmi
         public Cocktail_SO customerCocktail; // Müşterinin istediği kokteyl
-    } 
+
+        // Ses dosyaları
+        public AudioClip customerDialogueSound; // Müşteri konuşma sesi
+        public AudioClip playerResponseSound;   // Barmen cevap sesi
+        public AudioClip customerFinalReplySound; // Müşteri kapanış sesi
+        public AudioClip successDialogueSound;   // Başarı sesi
+        public AudioClip failDialogueSound;      // Başarısızlık sesi
+    }
 
     [Header("UI Referansları")]
     public Image customerImageUI;       // UI'daki müşteri resmi
@@ -49,8 +56,6 @@ public class DialogueManager : MonoBehaviour
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
         audioSource.volume = 0.5f;
-        
-
     }
 
     private void Start()
@@ -58,16 +63,33 @@ public class DialogueManager : MonoBehaviour
         // Buton dinleyicilerini ekle
         nextDialogueButton.onClick.AddListener(AdvanceDialogue);
         sceneChangeButton.onClick.AddListener(ChangeScene);
-        
+
         // Sonraki sahne butonunu başlangıçta devre dışı bırak
         sceneChangeButton.gameObject.SetActive(false);
-        
+
+        // Diyalog panelini başlangıçta gizle
+        if (dialoguePanel != null)
+        {
+            dialoguePanel.SetActive(false);
+        }
+
+        // Start butonunu bul ve dinleyici ekle
+        Button startButton = GameObject.Find("StartButton").GetComponent<Button>(); // Start butonunun adını doğru şekilde ayarlayın
+        startButton.onClick.AddListener(OnStartButtonClicked);
+    }
+
+    // Start butonuna tıklandığında çağrılır
+    private void OnStartButtonClicked()
+    {
+        // Diyalog panelini göster
+        if (dialoguePanel != null)
+        {
+            dialoguePanel.SetActive(true);
+        }
+
         // İlk diyaloğu başlat
         StartDialogue();
     }
-
-    // Örnek diyalogları oluştur
-    
 
     // Diyaloğu başlat
     public void StartDialogue()
@@ -85,10 +107,8 @@ public class DialogueManager : MonoBehaviour
             CompleteTyping();
             return;
         }
-
         // Ses çal
         PlaySound(buttonClickSound);
-
         // Diyalog aşamasını ilerlet
         dialogueStage++;
 
@@ -114,10 +134,11 @@ public class DialogueManager : MonoBehaviour
             Debug.LogError("Müşteri listesi boş veya geçersiz indeks!");
             return;
         }
-        
+
         Customer currentCustomer = customers[currentCustomerIndex];
         string dialogueContent = "";
         string speakerName = "";
+        AudioClip dialogueSound = null;
 
         // Diyalog aşamasına göre içeriği belirle
         switch (dialogueStage)
@@ -125,6 +146,7 @@ public class DialogueManager : MonoBehaviour
             case 0: // Müşteri konuşması
                 dialogueContent = currentCustomer.customerDialogue;
                 speakerName = currentCustomer.customerName;
+                dialogueSound = currentCustomer.customerDialogueSound;
                 if (customerImageUI != null)
                 {
                     customerImageUI.sprite = currentCustomer.customerSprite;
@@ -138,6 +160,7 @@ public class DialogueManager : MonoBehaviour
             case 1: // Barmen (oyuncu) cevabı
                 dialogueContent = currentCustomer.playerResponse;
                 speakerName = "Barmen";
+                dialogueSound = currentCustomer.playerResponseSound;
                 if (playerImageUI != null)
                 {
                     playerImageUI.sprite = currentCustomer.playerSprite;
@@ -151,6 +174,7 @@ public class DialogueManager : MonoBehaviour
             case 2: // Müşteri kapanış konuşması
                 dialogueContent = currentCustomer.customerFinalReply;
                 speakerName = currentCustomer.customerName;
+                dialogueSound = currentCustomer.customerFinalReplySound;
                 if (customerImageUI != null)
                 {
                     customerImageUI.sprite = currentCustomer.customerSprite;
@@ -167,6 +191,12 @@ public class DialogueManager : MonoBehaviour
         if (speakerNameText != null)
         {
             speakerNameText.text = speakerName;
+        }
+
+        // Ses çal
+        if (dialogueSound != null)
+        {
+            PlaySound(dialogueSound);
         }
 
         // Yazı animasyonunu başlat
@@ -195,13 +225,13 @@ public class DialogueManager : MonoBehaviour
         foreach (char letter in text.ToCharArray())
         {
             dialogueText.text += letter;
-            
+
             // Her harf için ses çal
             if (typingSound != null && letter != ' ')
             {
                 PlaySound(typingSound);
             }
-            
+
             yield return new WaitForSeconds(typingSpeed);
         }
 
@@ -219,7 +249,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         Customer currentCustomer = customers[currentCustomerIndex];
-        
+
         // Diyalog aşamasına göre tam metni göster
         switch (dialogueStage)
         {
@@ -241,7 +271,7 @@ public class DialogueManager : MonoBehaviour
     private void CompleteCocktailOrder()
     {
         Customer currentCustomer = customers[currentCustomerIndex];
-        
+
         // Müşterinin istediği kokteyli GameManager'a gönder
         if (currentCustomer.customerCocktail != null)
         {
@@ -252,11 +282,11 @@ public class DialogueManager : MonoBehaviour
         {
             Debug.LogWarning(currentCustomer.customerName + " için kokteyl tanımlanmamış!");
         }
-        
+
         // Sonraki sahne butonunu aktifleştir
         sceneChangeButton.gameObject.SetActive(true);
         nextDialogueButton.gameObject.SetActive(false);
-        
+
         // Diyalog panelini gizle (opsiyonel)
         if (dialoguePanel != null)
         {
@@ -279,7 +309,7 @@ public class DialogueManager : MonoBehaviour
     {
         UIManager.Instance.NextPanel();
     }
-    
+
     // Sonraki müşteriye geç
     public void NextCustomer()
     {
@@ -287,22 +317,22 @@ public class DialogueManager : MonoBehaviour
         {
             currentCustomerIndex = (currentCustomerIndex + 1) % customers.Length;
             dialogueStage = 0;
-            
+
             // Diyalog panelini tekrar göster
             if (dialoguePanel != null)
             {
                 dialoguePanel.SetActive(true);
             }
-            
+
             // Butonları ayarla
             nextDialogueButton.gameObject.SetActive(true);
             sceneChangeButton.gameObject.SetActive(false);
-            
+
             // Yeni diyaloğu başlat
             DisplayCurrentDialogue();
         }
     }
-    
+
     // Belirli bir müşteriye geç
     public void SetCustomer(int index)
     {
@@ -310,17 +340,17 @@ public class DialogueManager : MonoBehaviour
         {
             currentCustomerIndex = index;
             dialogueStage = 0;
-            
+
             // Diyalog panelini tekrar göster
             if (dialoguePanel != null)
             {
                 dialoguePanel.SetActive(true);
             }
-            
+
             // Butonları ayarla
             nextDialogueButton.gameObject.SetActive(true);
             sceneChangeButton.gameObject.SetActive(false);
-            
+
             // Yeni diyaloğu başlat
             DisplayCurrentDialogue();
         }
@@ -329,12 +359,14 @@ public class DialogueManager : MonoBehaviour
             Debug.LogError("Geçersiz müşteri indeksi: " + index);
         }
     }
-        public void TriggerSuccessDialogue()
+
+    public void TriggerSuccessDialogue()
     {
         if (currentCustomerIndex < customers.Length)
         {
             dialoguePanel.SetActive(true);
             dialogueText.text = customers[currentCustomerIndex].successDialogue;
+            PlaySound(customers[currentCustomerIndex].successDialogueSound);
         }
     }
 
@@ -344,10 +376,11 @@ public class DialogueManager : MonoBehaviour
         {
             dialoguePanel.SetActive(true);
             dialogueText.text = customers[currentCustomerIndex].failDialogue;
+            PlaySound(customers[currentCustomerIndex].failDialogueSound);
         }
     }
 
-        public string GetSuccessDialogue()
+    public string GetSuccessDialogue()
     {
         if (currentCustomerIndex < customers.Length)
             return customers[currentCustomerIndex].successDialogue;
