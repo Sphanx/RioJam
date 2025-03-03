@@ -21,3 +21,4 @@ MonoBehaviour:
     amountInCl: 2.5
   alcoholPercentage: 0
   isAlcoholic: 0
+  cocktailPostit: {fileID: 21300000, guid: dd0b765c79b99b0488dfa1d3ecb52756, type: 3}

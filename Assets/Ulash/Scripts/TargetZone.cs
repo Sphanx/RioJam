@@ -16,6 +16,7 @@ public class TargetZone : MonoBehaviour
     public DialogueManager dialogueManager; // Diyalog yöneticisi referansı
     public GameObject nextButton; // Next butonu referansı,
     public GameObject throwCupPanel;
+    public Transform resetPoint;
 
     void Start()
     {
@@ -82,6 +83,7 @@ public class TargetZone : MonoBehaviour
     // Next butonu için fonksiyon
     public void NextButton()
     {
+        this.transform.position = resetPoint.position;
         // GameManager'ı temizle
         GameManager.Instance.selectedDrinks.Clear();
         GameManager.Instance.cocktail = null;

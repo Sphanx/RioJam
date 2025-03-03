@@ -52,10 +52,7 @@ public class ShakerManager : MonoBehaviour
         {
             bottleImg.sprite = ingredients[currentIngredientIndex].drink.drinkImage;
         }
-        else
-        {
-            Debug.LogError("currentIngredientIndex is out of range.");
-        }
+
         if(isDone){
             ClearLiquids();
             Debug.Log("3131113");

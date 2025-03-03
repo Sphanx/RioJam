@@ -23,3 +23,4 @@ MonoBehaviour:
     amountInCl: 4
   alcoholPercentage: 10
   isAlcoholic: 1
+  cocktailPostit: {fileID: 21300000, guid: 9bbb487295ff0e94da5b2007d7b85a5c, type: 3}

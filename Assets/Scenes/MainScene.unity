@@ -149,10 +149,10 @@ RectTransform:
   m_GameObject: {fileID: 14749255}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000799, y: 3.0002398, z: 1.0000799}
+  m_LocalScale: {x: 1.0000799, y: 3.00024, z: 1.0000799}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1541559489}
+  m_Father: {fileID: 210651604}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1361,10 +1361,10 @@ RectTransform:
   m_GameObject: {fileID: 212146207}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000799, y: 3.0002398, z: 1.0000799}
+  m_LocalScale: {x: 1.0000799, y: 3.00024, z: 1.0000799}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 591758570891857448}
+  m_Father: {fileID: 1769228581}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1457,9 +1457,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 283069465}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: NextPanel
+      - m_Target: {fileID: 385937972}
+        m_TargetAssemblyTypeName: ShakerManager, Assembly-CSharp
+        m_MethodName: JumpNextScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1886,7 +1886,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1550665790860814334, guid: f135a2f6806b49e4680fbad470795725, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1562720977235816006, guid: f135a2f6806b49e4680fbad470795725, type: 3}
       propertyPath: m_Material
@@ -4517,7 +4517,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3027023019680571321, guid: 1c277b5374143b547a7260060a240fce, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8139252302323614206, guid: 1c277b5374143b547a7260060a240fce, type: 3}
       propertyPath: m_Color.b
@@ -4533,7 +4533,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2344834662949603406, guid: 1c277b5374143b547a7260060a240fce, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 14749256}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c277b5374143b547a7260060a240fce, type: 3}
 --- !u!1 &1272799015
@@ -4609,6 +4612,7 @@ MonoBehaviour:
   dialogueManager: {fileID: 3606230624838882967}
   nextButton: {fileID: 0}
   throwCupPanel: {fileID: 1541559488}
+  resetPoint: {fileID: 1529110026}
 --- !u!50 &1291430600
 Rigidbody2D:
   serializedVersion: 5
@@ -4781,6 +4785,37 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!1 &1529110025
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1529110026}
+  m_Layer: 0
+  m_Name: ResetPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1529110026
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529110025}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -389, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 118732528}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1541559488 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3785776645279726968, guid: fba8d279a99860b4cb153365ff4648fa, type: 3}
@@ -5149,7 +5184,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2344834662949603406, guid: 1c277b5374143b547a7260060a240fce, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 212146208}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c277b5374143b547a7260060a240fce, type: 3}
 --- !u!224 &1769228581 stripped
@@ -5748,7 +5786,6 @@ RectTransform:
   - {fileID: 385937971}
   - {fileID: 1044077340}
   - {fileID: 1769228581}
-  - {fileID: 212146208}
   - {fileID: 921053593}
   m_Father: {fileID: 44671516}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7039,7 +7076,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1402295745838936828, guid: fba8d279a99860b4cb153365ff4648fa, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1414157372345775712, guid: fba8d279a99860b4cb153365ff4648fa, type: 3}
       propertyPath: dialogueBox
@@ -7075,7 +7112,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3785776645279726968, guid: fba8d279a99860b4cb153365ff4648fa, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3803237121523615412, guid: fba8d279a99860b4cb153365ff4648fa, type: 3}
       propertyPath: m_Name
@@ -7252,12 +7289,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 107453107896401999, guid: fba8d279a99860b4cb153365ff4648fa, type: 3}
       insertIndex: -1
       addedObject: {fileID: 210651604}
-    - targetCorrespondingSourceObject: {fileID: 107453107896401999, guid: fba8d279a99860b4cb153365ff4648fa, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 14749256}
     - targetCorrespondingSourceObject: {fileID: 5105302874234805813, guid: fba8d279a99860b4cb153365ff4648fa, type: 3}
       insertIndex: 0
       addedObject: {fileID: 2004712421}
+    - targetCorrespondingSourceObject: {fileID: 5105302874234805813, guid: fba8d279a99860b4cb153365ff4648fa, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1529110026}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3803237121523615412, guid: fba8d279a99860b4cb153365ff4648fa, type: 3}
       insertIndex: -1
